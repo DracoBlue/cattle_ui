@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://cattle_ui/1.0">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/dark-hive/jquery-ui.css"/>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/mootools/1.2.5/mootools.js">
+        </script>
+        <script type="text/javascript" src="JsBehaviourToolkit.js">
+        </script>
+        <title>Testing cattle_ui</title>
+        <script type="text/javascript" src="../cattle_ui.js">
+        </script>
+        <style type="text/css">
+        	h3, h2, h1 {
+        		padding: 0.2em;
+				clear: both;
+        	}
+        
+        </style>
+    </head>
+    <body>
+    	<h1>Testing cattle_ui</h1>
+		<p>This page is meant to show all possible ways, which can be used to generate or combine cattle_ui elements.</p>
+		<p>Source and more information about cattle_ui can be found at <a href="https://github.com/DracoBlue/cattle_ui">https://github.com/DracoBlue/cattle_ui</a>. It is trying to be compatible to the css of jquery-ui.</p>
+		<p><strong>cattle_ui</strong> is copyright by DracoBlue at <a href="http://dracoblue.net">http://dracoblue.net</a> and licensed under the terms of MIT License.</p>
+        <script type="text/javascript">
+        	cattle_ui.ui('header', {
+				'dom_element': $$('h1')[0]
+			});
+        </script>		
+        <h2>Pure-Javascript-Demo</h2>
+        <p>
+            By using cattle_ui.createHeader and cattle_ui.createButton
+        </p>
+        <div id="container">
+        </div>
+        <script type="text/javascript">
+            var header = cattle_ui.createHeader({
+                'text': 'hi',
+                'size': 3
+            });
+            
+            var disabled_button = cattle_ui.createButton({
+                'disabled': true,
+                'text': 'Disabled Button'
+            });
+            
+            var enabled_button = cattle_ui.createButton({
+                'text': 'Normal Button'
+            });
+			
+			$('container').adopt(header, disabled_button, enabled_button);
+        </script>
+        <h2>Javascript ui-Shortcut-Demo</h2>
+        <p>
+            By using cattle_ui.ui()
+        </p>
+        <div id="js_short_container">
+        </div>
+        <script type="text/javascript">
+            var ui = cattle_ui.ui;
+            $('js_short_container').grab(ui('widget', [
+                 ui('header', {
+                     'text': 'head',
+                     'size': 2
+                 }),
+                 ui('widget', [
+                     ui('header', {
+                         'dom_element': new Element('h2', {
+                             'text': 'hi'
+                         })
+                     }),
+                     new Element('p', {
+                         'text': 'P Element here! ;-)'
+                     }),
+                     ui('button', {
+                         'disabled': true,
+                         'text': 'Disabled!'
+                     }),
+                     ui('button', {
+                         'disabled': false,
+                         'text': 'Not Disabled!'
+                     }),
+                     ui('textarea', {
+                         'value': 'This is spain?'
+                     })
+                 ]),
+                 ui('button', {
+                     'text': 'Enabled!'
+                 }),
+                 ui('textarea', {
+                     'value': 'This is spain?'
+                 })
+            ]));
+        </script>
+        <h2>Javascript Builder-Demo</h2>
+        <p>
+            By using cattle_ui.create() and :widget, :header, etc
+        </p>
+        <div id="js_container">
+        </div>
+        <script type="text/javascript">
+            $('js_container').adopt(cattle_ui.create({
+                ':widget': {
+                    ':header': {
+                        'text': 'head',
+                        'size': 2
+                    },
+                    ':widget': {
+                        ':header': {
+                            'dom_element': new Element('h2', {
+                                'text': 'hi'
+                            })
+                        },
+                        ':button': {
+                            'disabled': true,
+                            'text': 'Disabled!'
+                        },
+                        ':button+1': {
+                            'disabled': false,
+                            'text': 'Not Disabled!'
+                        },
+                        ':textarea': {
+                            'value': 'This is spain?'
+                        }
+                    },
+                    ':button': {
+                        'text': 'Enabled!'
+                    },
+                    ':textarea': {
+                        'value': 'This is spain?'
+                    }
+                }
+            }));
+        </script>
+		<!--
+        <h2>Javascript HAML-like Builder-Demo</h2>
+        <p>
+            By %widget, %header, etc
+        </p>
+        <div id="js2_container">
+        </div>
+        <script type="text/javascript">
+            $('js2_container').adopt(cattle_ui.create([
+                '%widget', [
+                    ['%header', { 
+                        'text': 'head',
+                        'size': 2
+                    }],
+                    ['%widget', [
+                        ['%header', {
+                            'dom_element': new Element('h2', {
+                                'text': 'hi'
+                            })
+                        }],
+                        ['%button', {
+                            'disabled': true,
+                            'text': 'Disabled!'
+                        }],
+                        ['%textarea', {
+                            'value': 'This is spain?'
+                        }]
+                    ]],
+                    ['%button', {
+                        'text': 'Enabled!'
+                    }],
+                    ['%textarea', {
+                        'value': 'This is spain?'
+                    }]
+                ]
+            ]));
+        </script>
+		-->
+        <h2>JsBehaviourToolkit-Demo</h2>
+        <p>
+            By using jsb_ui_widget and other css classes.
+        </p>
+        <div id="jsb_one" class="jsb_ jsb_ui_widget">
+            <h2 class="jsb_ jsb_ui_header">Head</h2>
+            <textarea class="jsb_ jsb_ui_textarea">
+                Hai
+            </textarea>
+            <h3 class="jsb_ jsb_ui_header">SubHead</h3>
+            <button class="jsb_ jsb_ui_button">
+                Hai
+            </button>
+            <div class="jsb_ jsb_ui_button_set">
+                <button class="jsb_ jsb_ui_button">
+                    1
+                </button>
+                <button class="jsb_ jsb_ui_button">
+                    2
+                </button>
+                <button class="jsb_ jsb_ui_button">
+                    2
+                </button>
+                <button class="jsb_ jsb_ui_button">
+                    2
+                </button>
+                <button class="jsb_ jsb_ui_button" disabled="disabled">
+                    oder
+                </button>
+                <button class="jsb_ jsb_ui_button">
+                    3
+                </button>
+            </div>
+        </div>
+        <h2>Custom ui:-tags Demo</h2>
+        <p>
+            By using &lt;ui:header&gt; and other tags, executed by using jsb_ui-Behaviour. Invalid xhtml (since new namespace ui, though :()
+        </p>
+        <div id="jsb_two" class="jsb_ jsb_ui">
+            <ui:header size="2">
+                Head
+            </ui:header>
+            <ui:textarea>
+                Hai
+            </ui:textarea>
+            <ui:header size="3">
+                Head
+            </ui:header>
+            <ui:button>
+                Hai
+            </ui:button>
+            <ui:button_set>
+                <ui:button>
+                    Hai
+                </ui:button>
+                <ui:button disabled="true">
+                    Hai
+                </ui:button>
+                <ui:button>
+                    Hai
+                </ui:button>
+            </ui:button_set>
+        </div>
+		
+        <script type="text/javascript">
+            $each(['container', 'js_container', 'js_short_container'], function(element) {
+                var original_element = element = $(element);
+                
+                while (element.nodeName.toLowerCase() !== 'script') {
+                    element = $(element.nextSibling);
+                }
+                
+                var pre = new Element('pre', {
+                    'text': element.get('text'),
+                    'styles': {
+						'display': 'block',
+                        'width': '50%',
+                        'float': 'left'
+                    }
+                });
+                pre.inject(original_element, 'after');
+                original_element.setStyles({
+                    'width': '50%',
+                    'float': 'left',
+                    'clear': 'left'
+                });
+            });
+        	
+        	$each(['jsb_one', 'jsb_two'], function(element) {
+				element = $(element);
+				
+				var pre = new Element('pre', {
+					'text': element.get('html'),
+                    'styles': {
+						'width': '50%',
+                        'display': 'block',
+                        'float': 'left'
+					}
+				});
+				pre.inject(element, 'after');
+				element.setStyles({
+					'width': '50%',
+					'float': 'left',
+					'clear': 'left'
+			    });
+			});
+        
+        </script>
+		
+    </body>
+</html>
