@@ -42,6 +42,11 @@ The javascript classes are MooTools classes and follow the following rules:
 At `examples/show_off.html` you can see the different ways, how you can
 build something with `cattle_ui`.
 
+# Changelog
+
+- 2011/02/02
+-- added cattle_ui.registerCreatorForType('yourtag', YourClass)
+
 # License
 
 cattle_ui is licensed under the terms of MIT. See LICENSE for more information.

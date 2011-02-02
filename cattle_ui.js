@@ -355,15 +355,17 @@ cattle_ui.content.createInput = function(options)
 
 cattle_ui.getCreatorForType = function(type_name)
 {
-    var creator_map = {
-        'header': cattle_ui.Header,
-        'input': cattle_ui.content.Input,
-        'button': cattle_ui.Button,
-        'widget': cattle_ui.Widget,
-        'button_set': cattle_ui.ButtonSet,
-        'textarea': cattle_ui.content.Textarea
-    };
-    return creator_map[type_name];
+    return this.creators[type_name];
+};
+
+cattle_ui.registerCreatorForType = function(type_name, creator_function)
+{
+    if (typeof this.creators[type_name] !== 'undefined')
+    {
+        throw new Error('You cannot reregister a creator for ' + type_name + '. There is already one!');
+    }
+    
+    this.creators[type_name] = creator_function;
 };
 
 cattle_ui.createByTypeFromDomElement = function(type_name, dom_element, options)
@@ -452,10 +454,33 @@ cattle_ui.createIncludedUiElements = function(dom_element)
     }
 };
 
+cattle_ui.creators = {
+    'header': cattle_ui.Header,
+    'input': cattle_ui.content.Input,
+    'button': cattle_ui.Button,
+    'widget': cattle_ui.Widget,
+    'button_set': cattle_ui.ButtonSet,
+    'textarea': cattle_ui.content.Textarea
+};
+
 if (typeof JsBehaviourToolkit !== 'undefined')
 {
     JsBehaviourToolkit.registerHandler('ui', cattle_ui.createIncludedUiElements);
-
+    
+    (function() {
+        /*
+         * Let's tune the registerCreatorForType function, so that it will also
+         * register the jsbehaviourtoolkit stuff for us.
+         */
+        var original_creator_function = cattle_ui.registerCreatorForType;
+    
+        cattle_ui.registerCreatorForType = function(type_name, creator_function)
+        {
+            JsBehaviourToolkit.registerHandler('ui_' + type_name, creator_function);
+            original_creator_function.apply(cattle_ui, [type_name, creator_function]);
+        };
+    })();
+    
     JsBehaviourToolkit.registerHandler('ui_header', cattle_ui.Header);
     JsBehaviourToolkit.registerHandler('ui_button', cattle_ui.Button);
     JsBehaviourToolkit.registerHandler('ui_button_set', cattle_ui.ButtonSet);
