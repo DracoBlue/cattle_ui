@@ -45,7 +45,7 @@ build something with `cattle_ui`.
 # Changelog
 
 - 2011/02/02
--- added cattle_ui.registerCreatorForType('yourtag', YourClass)
+  - added cattle_ui.registerCreatorForType('yourtag', YourClass)
 
 # License
 
