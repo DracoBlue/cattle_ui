@@ -210,30 +210,32 @@
         <p>
             By using &lt;ui:header&gt; and other tags, executed by using jsb_ui-Behaviour. Invalid xhtml (since new namespace ui, though :()
         </p>
-        <div id="jsb_two" class="jsb_ jsb_ui">
-            <ui:header size="2">
-                Head
-            </ui:header>
-            <ui:textarea>
-                Hai
-            </ui:textarea>
-            <ui:header size="3">
-                Head
-            </ui:header>
-            <ui:button>
-                Hai
-            </ui:button>
-            <ui:button_set>
+        <div id="jsb_two">
+            <div class="jsb_ jsb_ui">
+                <ui:header size="2">
+                    Head
+                </ui:header>
+                <ui:textarea>
+                    Hai
+                </ui:textarea>
+                <ui:header size="3">
+                    Head
+                </ui:header>
                 <ui:button>
                     Hai
                 </ui:button>
-                <ui:button disabled="true">
-                    Hai
-                </ui:button>
-                <ui:button>
-                    Hai
-                </ui:button>
-            </ui:button_set>
+                <ui:button_set>
+                    <ui:button>
+                        Hai
+                    </ui:button>
+                    <ui:button disabled="true">
+                        Hai
+                    </ui:button>
+                    <ui:button>
+                        Hai
+                    </ui:button>
+                </ui:button_set>
+            </div>
         </div>
         
         <script type="text/javascript">
