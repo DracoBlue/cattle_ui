@@ -452,7 +452,7 @@ cattle_ui.createIncludedUiElements = function(dom_element)
     }
 };
 
-if (JsBehaviourToolkit)
+if (typeof JsBehaviourToolkit !== 'undefined')
 {
     JsBehaviourToolkit.registerHandler('ui', cattle_ui.createIncludedUiElements);
 
